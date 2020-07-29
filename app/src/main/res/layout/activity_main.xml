@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--dataBinding必须以layout作为根标签-->
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--数据对象-->
+    <data>
+
+        <import type="android.view.View" />
+
+        <!--//如果有相同名字的 View 可以使用使用 alias 来区分-->
+        <!--        <import type="com.manu.View"-->
+        <!--            alias="MView"/>-->
+
+        <variable name="user" type="com.lsw.demo.databindingdemo.User"/>
+        <variable
+            name="handler"
+            type="com.lsw.demo.databindingdemo.MyHandler"/>
+        <variable
+            name="presenter"
+            type="com.lsw.demo.databindingdemo.MyPresenter" />
+    </data>
+    <!--视图元素-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--dataBinding中具体属性值的配置在"@{}"中进行配置-->
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{user.name,default=姓名}"/>
+<!--        //三目运算符完整写法-->
+<!--        android:text="@{user.displayName != null ? user.displayName : user.lastName}"-->
+<!--        //三目运算符简写-->
+<!--        android:text="@{user.displayName ?? user.lastName}"-->
+
+        <!--第一种方式-->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="click me"
+            android:onClick="@{handler::onClickEvent}"/>
+        <!--第二种方式-->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="click me 2"
+            android:onClick="@{handler.onClickEvent}"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{(view) -> presenter.onClickEvent(user)}"
+            android:text="click me 3" />
+
+<!--        如果使用了 include 布局，则要使用 bind 绑定 include 包含的布局与主布局使用同样的变量-->
+        <!--bind绑定变量-->
+<!--        <include-->
+<!--            layout="@layout/test_layout"-->
+<!--            bind:userTest="@{user}" />-->
+
+    </LinearLayout>
+</layout>

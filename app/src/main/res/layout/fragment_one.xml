@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+<!--    注意：与元素类型 "variable" 相关联的 "type" 属性值不能包含 '<' 字符。-->
+    <data>
+
+        <import type="java.util.Map" />
+
+        <import type="java.util.List" />
+
+        <!--Map-->
+        <variable
+            name="map"
+            type="Map&lt;String,String>" />
+
+        <variable
+            name="key"
+            type="String" />
+
+        <!--List-->
+        <variable
+            name="list"
+            type="List&lt;String>" />
+
+        <variable
+            name="index"
+            type="int" />
+
+        <variable
+            name="user"
+            type="com.lsw.demo.databindingdemo.User"/>
+
+    </data>
+<!--    //@{} 表达式中使用字符串-->
+<!--    &lt;!&ndash;使用单引号&ndash;&gt;-->
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text='@{map["key"]}' />-->
+<!--    &lt;!&ndash;使用后引号&ndash;&gt;-->
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@{map[`key`]}" />-->
+<!--    &lt;!&ndash;在@{}中可以使用字符串资源&ndash;&gt;-->
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@{@string/app_name}"/>-->
+
+    <!--注意Map和List取值方式-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{map.key}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{list[0]}" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{user.name,default=姓名}"/>
+
+
+    </LinearLayout>
+</layout>
